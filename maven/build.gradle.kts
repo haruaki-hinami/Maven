@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -29,6 +30,30 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/haruaki-hinami/Maven")
+            credentials {
+                username = ""
+                password = ""
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("maven_test") {
+            groupId = "com.riteido"
+            artifactId = "maven"
+            version = "1.0.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
     }
 }
 
