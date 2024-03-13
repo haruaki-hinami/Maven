@@ -39,8 +39,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/haruaki-hinami/Maven")
             credentials {
-                username = ""
-                password = ""
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
@@ -48,7 +48,7 @@ publishing {
         create<MavenPublication>("maven_test") {
             groupId = "com.riteido"
             artifactId = "maven"
-            version = "1.0.0"
+            version = "1.0.1"
 
             afterEvaluate {
                 from(components["release"])
